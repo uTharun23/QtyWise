@@ -18,28 +18,11 @@ The repository is organized to maintain a clear separation of design blueprints,
 
 ```
 QtyWise/
-├── docs/                               # Architectural & Design Blueprints
-│   ├── 01-Project-Blueprint.md         # Project Goals & Scope Outline
-│   ├── 02-Requirements.md              # Software Requirements Specifications (SRS)
-│   ├── 03-System-Architecture.md       # Jamstack & Serverless Containers Infrastructure
-│   ├── 04-Database-Design.md           # 8 normalized entities relational schema
-│   ├── 05-Recommendation-Engine.md     # Portion math, yield ratios, and rounding rules
-│   ├── 06-UI-UX.md                     # Responsive interface grids and accessibility
-│   ├── 07-API-Documentation.md         # API route schemas and JSON formats
-│   ├── 08-Testing.md                   # QA checklists & test suite specifications
-│   ├── 09-Deployment.md                # Cloud hosting setup & rollback strategies
-│   ├── 10-Future-Roadmap.md            # Category expansions and multi-region scaling
-│   ├── 11-Master-Data-Framework.md     # Agricultural sourcing & trust score strategy
-│   └── 12-Master-Dataset-Specification.md # 23-field master schema & casing rules
-├── database/                           # Master Data Pipelines
-│   ├── schemas/
-│   │   └── validation_schema.json      # JSON Schema parameters validator
-│   ├── master_data/
-│   │   ├── categories.json             # Two-tier category hierarchy definitions
-│   │   └── ap_master_dataset_v1.0.csv  # Production CSV master data records
-│   └── scripts/
-│       ├── validate_csv.py             # Pre-commit dataset validator linter
-│       └── compile_db_bundle.py        # Dataset compilation script
+│
+├── frontend/                           # Responsive Web Client Interface
+│   ├── app.js                          # SPA state manager & API client
+│   ├── index.css                       # CSS custom styling variable system
+│   └── index.html                      # Semantic markup and ARIA tags
 ├── backend/                            # Node.js Express REST API Service
 │   ├── config/                         # Environment config loader
 │   ├── controllers/                    # Routing controllers
@@ -47,11 +30,14 @@ QtyWise/
 │   ├── routes/                         # API routers
 │   ├── services/                       # Normalizer and portion engines
 │   └── utils/                          # Synchronous CSV parsers
-├── frontend/                           # Responsive Static PWA Client
-│   ├── app.js                          # SPA state manager & API client
-│   ├── index.css                       # CSS custom styling variable system
-│   └── index.html                      # Semantic markup and ARIA tags
-└── README.md                           # This Developer & Repository Index
+├── dataset/                            # Production Master Data Catalog
+│   ├── categories.json                 # Two-tier category hierarchy definitions
+│   └── ap_master_dataset_v1.0.csv      # Production CSV master data records
+├── screenshots/                        # Application Interface Previews
+├── docs/                               # Architectural & Design Blueprints
+├── README.md                           # Developer & Repository Index
+├── LICENSE                             # MIT Open Source License
+└── .gitignore                          # Git Ignored Assets & Environments
 ```
 
 ---

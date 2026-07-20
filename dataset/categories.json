@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "name": "Leafy Vegetables",
+      "sub_categories": ["Acidic Greens", "Neutral Greens", "Bitter Greens", "Aromatics"]
+    },
+    {
+      "name": "Fruit Vegetables",
+      "sub_categories": ["Solanaceous", "Malvaceous", "Musaceae", "Anacardiaceae", "Moraceae", "Citric"]
+    },
+    {
+      "name": "Root Vegetables",
+      "sub_categories": ["Tubers", "Taproots", "Allium"]
+    },
+    {
+      "name": "Gourds",
+      "sub_categories": ["Cucurbits"]
+    },
+    {
+      "name": "Beans & Pods",
+      "sub_categories": ["Legumes"]
+    },
+    {
+      "name": "Bulbs & Aromatics",
+      "sub_categories": ["Allium", "Zingiberaceae"]
+    },
+    {
+      "name": "Herbs",
+      "sub_categories": ["Culinary Herbs"]
+    },
+    {
+      "name": "Mushrooms",
+      "sub_categories": ["Fungi"]
+    },
+    {
+      "name": "Meat",
+      "sub_categories": ["Poultry", "Red Meat"]
+    },
+    {
+      "name": "Fish",
+      "sub_categories": ["Freshwater", "Marine"]
+    },
+    {
+      "name": "Seafood",
+      "sub_categories": ["Shellfish"]
+    },
+    {
+      "name": "Eggs",
+      "sub_categories": ["Avian Eggs"]
+    }
+  ]
+}

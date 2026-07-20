@@ -19,8 +19,8 @@ const resolvePath = (relativeOrAbsolute) => {
 const serverConfig = {
   port: parseInt(process.env.PORT, 10) || 5001,
   env: process.env.NODE_ENV || 'development',
-  masterDataPath: resolvePath(process.env.MASTER_DATA_PATH || '../database/master_data/ap_master_dataset_v1.0.csv'),
-  categoriesPath: resolvePath(process.env.CATEGORIES_PATH || '../database/master_data/categories.json')
+  masterDataPath: resolvePath(process.env.MASTER_DATA_PATH || '../dataset/ap_master_dataset_v1.0.csv'),
+  categoriesPath: resolvePath(process.env.CATEGORIES_PATH || '../dataset/categories.json')
 };
 
 // Simple validations
