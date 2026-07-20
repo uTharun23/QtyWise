@@ -17,8 +17,45 @@ Many households struggle with accurately estimating grocery purchase quantities,
 *   **Problem**: Over-purchasing perishable items leads to food waste, while under-purchasing causes inconvenience.
 *   **Solution**: QtyWise uses standardized per-person consumption formulas and market yield factors to recommend real-world purchase quantities.
 
-> [!IMPORTANT]
-> **Functional Scope**: QtyWise is a portion size calculator and shopping list manager. It is **NOT** an e-commerce platform and does **NOT** provide food recipes.
+---
+
+## 🔄 System Architecture & Application Workflow
+
+```mermaid
+flowchart TD
+    subgraph UI["📱 User Interface (Frontend - Vanilla JS)"]
+        A["👤 User Configures Parameters"] --> A1["Set People Count (1-100)"]
+        A --> A2["Set Days Required (1-30)"]
+        A --> A3["Select Storage (Ambient / Refrigerated)"]
+        A --> A4["Search & Select Produce (Bilingual Index)"]
+        A4 --> B["Click 'Get Recommendation'"]
+    end
+
+    subgraph Decision{"🌐 Connection Status"}
+        B --> C{Is Backend API Online?}
+    end
+
+    subgraph API["⚡ Node.js Express REST API (Vercel Serverless)"]
+        C -- "Yes (HTTP 200)" --> D["POST /api/recommend Payload"]
+        D --> E["Load Master Dataset (ap_master_dataset_v1.0.csv)"]
+        E --> F["Apply Per-Person Portion Formulas"]
+        F --> G["Convert Raw Grams to Market Units (Bundles, Eggs, Count, kg/g)"]
+        G --> H["Evaluate Shelf Life & Storage Warnings"]
+        H --> I["Return Recommendations JSON"]
+    end
+
+    subgraph Fallback["⚡ In-Browser Offline Engine"]
+        C -- "No / Offline" --> J["Client-Side Fallback Engine (app.js)"]
+        J --> F
+    end
+
+    subgraph Output["📊 Results & Actions"]
+        I --> K["Render Dynamic Recommendation Cards"]
+        K --> L["Switch Language (English ↔ Telugu)"]
+        K --> M["Save Shopping List to LocalStorage"]
+        M --> N["Manage History Side Panel (Open / Rename / Delete)"]
+    end
+```
 
 ---
 
