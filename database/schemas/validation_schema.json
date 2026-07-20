@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "QtyWiseMasterDatasetSchema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "item_id",
+      "english_name",
+      "telugu_name",
+      "category",
+      "sub_category",
+      "measurement_unit",
+      "recommended_storage",
+      "avg_weekly_consumption_pp",
+      "min_quantity",
+      "max_quantity",
+      "popularity_score",
+      "calculation_priority"
+    ],
+    "properties": {
+      "item_id": {
+        "type": "string",
+        "pattern": "^QTY-AP-[A-Z]{3}-[0-9]{4}$"
+      },
+      "english_name": {
+        "type": "string",
+        "pattern": "^[A-Z][a-zA-Z\\s()]+$"
+      },
+      "telugu_name": {
+        "type": "string"
+      },
+      "category": {
+        "type": "string",
+        "enum": ["Vegetables", "Leafy Vegetables", "Root Vegetables", "Meat", "Fish", "Seafood", "Eggs", "Herbs"]
+      },
+      "sub_category": {
+        "type": "string"
+      },
+      "measurement_unit": {
+        "type": "string",
+        "enum": ["kg", "g", "unit"]
+      },
+      "shelf_life_days": {
+        "type": "object",
+        "properties": {
+          "ambient": { "type": ["integer", "null"] },
+          "refrigerated": { "type": ["integer", "null"] },
+          "frozen": { "type": ["integer", "null"] }
+        }
+      },
+      "recommended_storage": {
+        "type": "string",
+        "enum": ["Ambient Dry", "Ambient Ventilated", "Refrigerated", "Frozen"]
+      },
+      "avg_weekly_consumption_pp": {
+        "type": "number",
+        "minimum": 0.001
+      },
+      "min_quantity": {
+        "type": "number",
+        "minimum": 0.001
+      },
+      "max_quantity": {
+        "type": "number",
+        "minimum": 0.001
+      },
+      "purchase_notes": {
+        "type": "string",
+        "maxLength": 250
+      },
+      "common_household_usage": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "season_availability": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": ["Kharif", "Rabi", "Summer", "Year-Round"]
+        }
+      },
+      "popularity_score": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 10
+      },
+      "calculation_priority": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 3
+      },
+      "recommendation_notes": {
+        "type": "string",
+        "maxLength": 300
+      }
+    }
+  }
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QtyWise — Smart Portion Calculator</title>
+  <meta name="description" content="A smart quantity recommendation tool that helps users quickly decide how much food to buy.">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Header Section with Language Toggle & Subtitle -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="app-branding">
+        <svg class="app-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <div class="branding-text">
+          <span class="app-title">QtyWise</span>
+          <span class="app-subtitle" id="app-subtitle">Know Exactly How Much to Buy</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-history" class="history-toggle-btn" aria-label="View Saved Shopping Lists">
+          📋 Saved Lists
+        </button>
+        <button id="btn-language-toggle" class="lang-toggle-btn" aria-label="Toggle language to Telugu">
+          తెలుగు
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Calculator Container -->
+  <main class="app-container">
+
+    <!-- Configuration Card -->
+    <section class="config-card">
+      
+      <!-- Steppers: People & Days -->
+      <div class="stepper-row">
+        <!-- People count stepper -->
+        <div class="stepper-group">
+          <label for="people-count" class="input-label" id="label-people">Number of People</label>
+          <div class="stepper-control">
+            <button type="button" id="btn-people-minus" class="stepper-btn" aria-label="Decrease people count">-</button>
+            <input type="number" id="people-count" class="stepper-value-input" value="4" min="1" max="100" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Number of people">
+            <button type="button" id="btn-people-plus" class="stepper-btn" aria-label="Increase people count">+</button>
+          </div>
+        </div>
+
+        <!-- Items Required For (Days) stepper -->
+        <div class="stepper-group">
+          <label for="duration-days" class="input-label" id="label-duration">Items Required For (Days)</label>
+          <div class="stepper-control">
+            <button type="button" id="btn-duration-minus" class="stepper-btn" aria-label="Decrease days">-</button>
+            <input type="number" id="duration-days" class="stepper-value-input" value="7" min="1" max="30" step="1" inputmode="numeric" pattern="[0-9]*" aria-label="Items required for days">
+            <button type="button" id="btn-duration-plus" class="stepper-btn" aria-label="Increase days">+</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Storage Toggles -->
+      <div class="select-group">
+        <div class="label-with-helper">
+          <label class="input-label" id="label-storage">Storage Type</label>
+          <span class="input-helper" id="storage-helper">Optional • Improves storage suggestions</span>
+        </div>
+        <div class="segmented-control" role="radiogroup" aria-labelledby="label-storage">
+          <button type="button" id="storage-ambient" class="segmented-btn" role="radio" aria-checked="false" data-value="AMBIENT">
+            Ambient
+          </button>
+          <button type="button" id="storage-refrigerated" class="segmented-btn active" role="radio" aria-checked="true" data-value="REFRIGERATED">
+            ✓ Refrigerated
+          </button>
+        </div>
+      </div>
+
+      <!-- Add Item Autocomplete Search Box -->
+      <div class="add-item-container">
+        <label for="item-search" class="input-label" id="label-add-item">Add Item</label>
+        <div class="search-wrapper">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="item-search" class="search-control" placeholder="Loading food catalog..." autocomplete="off" disabled>
+          <button type="button" id="btn-search-clear" class="search-clear-btn" aria-label="Clear search input" style="display: none;">&times;</button>
+        </div>
+        <!-- Autocomplete Suggestions List -->
+        <div id="autocomplete-suggestions" class="autocomplete-suggestions" style="display: none;"></div>
+      </div>
+
+      <!-- Selected Items Checklist -->
+      <div class="selected-items-section" id="selected-items-section">
+        <h3 class="section-title" id="label-selected-title">Selected Items</h3>
+        <ul id="selected-items-list" class="selected-items-list">
+          <li class="empty-state-placeholder" id="selected-empty-text">🥬 Add vegetables, fruits or meat to generate your shopping recommendation.</li>
+        </ul>
+        <button type="button" id="btn-save-list" class="save-list-btn" style="display: none;">
+          🛒 Save Shopping List
+        </button>
+      </div>
+
+      <!-- Calculate Primary Action Button (Get Recommendation) -->
+      <button type="button" id="btn-calculate" class="calculate-btn" disabled>
+        Get Recommendation
+      </button>
+
+    </section>
+
+    <!-- Purchase Recommendations (Results Section) -->
+    <section id="results-section" class="results-section" style="display: none;">
+      <h3 class="section-title" id="label-results-title">Recommended Quantities</h3>
+      
+      <ul id="recommendations-list" class="recommendations-list">
+        <!-- Populated dynamically -->
+      </ul>
+
+      <!-- Bottom Action Bar -->
+      <div class="results-actions">
+        <button type="button" id="btn-new-recommendation" class="action-btn btn-primary" style="width: 100%;">
+          Start New Shopping
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- History Modal Side Panel -->
+  <div id="history-modal" class="history-modal-overlay" style="display: none;">
+    <div class="history-modal-backdrop" id="history-backdrop"></div>
+    <div class="history-drawer">
+      <div class="history-header">
+        <h3 id="label-history-header">📋 Saved Shopping Lists</h3>
+        <button type="button" id="btn-close-history" class="history-close-btn" aria-label="Close History">&times;</button>
+      </div>
+      <div class="history-search-bar">
+        <input type="text" id="history-search-input" class="search-control" placeholder="Search saved lists...">
+      </div>
+      <div id="history-cards-container" class="history-cards-container">
+        <!-- History Cards rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Loader Overlay (Calculating the best quantity...) -->
+  <div id="loader" class="loader-overlay" style="display: none;">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <span class="loader-text" id="loader-text">Calculating the best quantity...</span>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- Javascript Logic -->
+  <script src="app.js" type="module"></script>
+</body>
+</html>
