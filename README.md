@@ -99,15 +99,12 @@ npx serve ./ -p 3000
 
 ---
 
-## 🖼️ Screenshots
+## 🖼️ Application Interface Previews
 
-| Calculator Configuration | Selected Items & Shopping List |
-| :---: | :---: |
-| *(Add preview screenshot to `screenshots/config.png`)* | *(Add preview screenshot to `screenshots/selection.png`)* |
-
-| Purchase Recommendations | Saved Lists & History Drawer |
-| :---: | :---: |
-| *(Add preview screenshot to `screenshots/results.png`)* | *(Add preview screenshot to `screenshots/saved-lists.png`)* |
+| 1. English Mode UI | 2. Telugu Mode UI | 3. Saved Lists Drawer |
+| :---: | :---: | :---: |
+| <img src="screenshots/english_ui_calculator.png" width="300" alt="English Mode Calculator"> | <img src="screenshots/telugu_ui_calculator.png" width="300" alt="Telugu Mode Calculator"> | <img src="screenshots/saved_lists_drawer.png" width="300" alt="Saved Lists Drawer"> |
+| *Editable Stepper Inputs & English Mode* | *Full Bilingual Telugu UI Layout* | *Saved Shopping Lists Side Panel* |
 
 ---
 
