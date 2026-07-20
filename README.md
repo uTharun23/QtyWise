@@ -5,161 +5,137 @@
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](#)
 [![Region](https://img.shields.io/badge/region-Andhra%20Pradesh-orange.svg)](#)
 
-QtyWise is a smart, mobile-first purchase quantity advisory utility designed for households and community kitchens in Andhra Pradesh. It helps users calculate the exact raw quantity of vegetables, leafy vegetables, meat, fish, seafood, herbs, and eggs to purchase based on portion requirements, Items Required For (days), and refrigerator storage preferences, minimizing retail food waste and optimizing grocery budgets.
+QtyWise is a smart, mobile-first purchase quantity advisory utility designed for households and community kitchens in Andhra Pradesh. It calculates the exact raw quantity of vegetables, leafy greens, meat, fish, seafood, herbs, and eggs to purchase based on portion requirements, duration (days), and refrigerator storage preferences — minimizing food waste and optimizing grocery budgets.
+
+---
+
+## 📌 Project Overview
+
+Many households struggle with accurately estimating grocery purchase quantities, leading to either food spoilage or shortage. QtyWise solves this by providing precise portion calculations based on regional consumption data.
+
+*   **Problem**: Over-purchasing perishable items leads to food waste, while under-purchasing causes inconvenience.
+*   **Solution**: QtyWise uses standardized per-person consumption formulas and market yield factors to recommend real-world purchase quantities.
 
 > [!IMPORTANT]
-> **Functional Boundary**: QtyWise is a portion size calculator and shopping list planner. It is **NOT** an e-commerce platform, it does **NOT** sell products, and it does **NOT** provide food recipes.
+> **Functional Scope**: QtyWise is a portion size calculator and shopping list manager. It is **NOT** an e-commerce platform and does **NOT** provide food recipes.
 
 ---
 
-## 📂 Repository Structure & Documentation Index
+## ✨ Key Features
 
-The repository is organized to maintain a clear separation of design blueprints, master data sets, backend computing API services, and responsive web client interfaces.
+*   **🧮 Smart Portion Recommendation**: Calculates exact quantities using regional portion formulas (per person per day).
+*   **🛍️ Real-World Market Units**: Displays quantities in traditional Indian purchase units (`Bunches/Bundles`, `Packets`, `Eggs`, `Pieces`, `g`, `kg`).
+*   **🔢 Editable Stepper Inputs**: Direct numeric typing for **Number of People** (1–100) and **Items Required For** (1–30 Days) alongside `+` / `−` buttons.
+*   **📋 Saved Shopping Lists & History**: Save, search, rename, open, and delete custom shopping lists stored in Local Storage (`qtywise_saved_lists_v1`).
+*   **🌐 Dynamic Bilingual UI**: Instant English $\leftrightarrow$ Telugu language toggle (`Green Gongura (తెల్ల గోంగూర)` / `తెల్ల గోంగూర (Green Gongura)`).
+*   **⚡ 100% Offline Capability**: Full calculation engine fallback available in client-side JavaScript when disconnected.
+*   **📱 Mobile-First Responsive Design**: Optimized for touch targets ($\ge 44 \times 44\text{px}$) across viewports from 320px to 4K.
+
+---
+
+## 📂 Repository Structure
 
 ```
-QtyWise/
+QtyWise
 │
-├── frontend/                           # Responsive Web Client Interface
-│   ├── app.js                          # SPA state manager & API client
-│   ├── index.css                       # CSS custom styling variable system
-│   └── index.html                      # Semantic markup and ARIA tags
-├── backend/                            # Node.js Express REST API Service
-│   ├── config/                         # Environment config loader
-│   ├── controllers/                    # Routing controllers
-│   ├── middleware/                     # Validators and error filters
-│   ├── routes/                         # API routers
-│   ├── services/                       # Normalizer and portion engines
-│   └── utils/                          # Synchronous CSV parsers
-├── dataset/                            # Production Master Data Catalog
-│   ├── categories.json                 # Two-tier category hierarchy definitions
-│   └── ap_master_dataset_v1.0.csv      # Production CSV master data records
-├── screenshots/                        # Application Interface Previews
-├── docs/                               # Architectural & Design Blueprints
-├── README.md                           # Developer & Repository Index
-├── LICENSE                             # MIT Open Source License
-└── .gitignore                          # Git Ignored Assets & Environments
+├── frontend                        # Responsive Web Client Interface (HTML5, Vanilla CSS3, ES6 JS)
+│   ├── app.js                      # SPA State Manager & API Client
+│   ├── index.css                   # Custom CSS Design System
+│   └── index.html                  # Semantic Web App Layout
+├── backend                         # Node.js & Express REST API Service
+│   ├── config/                     # Environment & Path Configuration
+│   ├── controllers/                # API Request Controllers
+│   ├── middleware/                 # Validators & Error Handlers
+│   ├── routes/                     # API Endpoints Router
+│   ├── services/                   # Normalizer & Portion Engines
+│   └── utils/                      # Synchronous CSV Parsers
+├── dataset                         # Production Master Data Catalog
+│   ├── categories.json             # Two-Tier Category Definitions
+│   └── ap_master_dataset_v1.0.csv  # 119 Production Master Items (AP Region)
+├── screenshots                     # Application Interface Previews
+├── docs                            # Architectural & Design Blueprints
+├── README.md                       # Repository Documentation
+├── LICENSE                         # MIT Open Source License
+└── .gitignore                      # Git Ignored Build Assets & Environments
 ```
 
 ---
 
-## 🛠️ Technology Stack
+## 🛠️ Tech Stack
 
-QtyWise V1 utilizes a lightweight, zero-overhead tech stack to ensure sub-second page loads on budget mobile devices and zero dynamic database licensing costs:
-*   **Frontend**: Vanilla HTML5 (semantic layout), CSS3 (CSS variables design system, flex/grid viewports), and ES6 JavaScript (Single-Page Application state logic).
-*   **Backend**: Node.js (v24+) with Express, CORS, Morgan logging, and Dotenv configurations.
-*   **Database**: Static in-memory CSV/JSON database files. Data is parsed and normalized to integer grams on startup to prevent binary floating-point rounding errors.
-
----
-
-## ⚙️ Setup & Installation Guide
-
-To get QtyWise running locally on your workstation, follow these steps:
-
-### 1. Backend API Service Setup
-1.  Open your terminal and navigate to the `backend/` directory:
-    ```bash
-    cd backend
-    ```
-2.  Install dependencies (using the Windows batch command helper if running PowerShell with restricted execution policies):
-    ```bash
-    # Standard:
-    npm install
-
-    # Windows PowerShell Restricted Bypass:
-    npm.cmd install
-    ```
-3.  Configure your environment parameters. Create a `.env` file in the `backend/` directory:
-    ```env
-    PORT=5000
-    NODE_ENV=development
-    MASTER_DATA_PATH=../database/master_data/ap_master_dataset_v1.0.csv
-    CATEGORIES_PATH=../database/master_data/categories.json
-    ```
-4.  Start the development server with watch-mode enabled:
-    ```bash
-    npm.cmd run dev
-    ```
-    *The API will boot and be accessible at `http://localhost:5000`.*
-
-### 2. Frontend Client Setup
-1.  Open a new terminal window and navigate to the `frontend/` directory:
-    ```bash
-    cd frontend
-    ```
-2.  Serve the static assets using Node's lightweight static web server:
-    ```bash
-    npx.cmd -y serve ./ -p 3000
-    ```
-3.  Open your web browser or mobile emulator and load:
-    *   [http://localhost:3000](http://localhost:3000)
+*   **Frontend**: HTML5, Vanilla CSS3 (CSS Variables, Flexbox/Grid), ES6 JavaScript (Native SPA State Management).
+*   **Backend**: Node.js (v18+), Express.js, CORS, Morgan Logger, Dotenv.
+*   **Master Dataset**: CSV / JSON in-memory dataset engine with integer-gram normalization on startup.
 
 ---
 
-## 📖 User Guide & How to Use
+## ⚙️ Installation & Setup Guide
 
-QtyWise provides a single-screen interface for selecting items and calculating recommendations:
+### Prerequisites
+*   Node.js (v18.0.0 or higher)
+*   npm (v9.0.0 or higher)
 
-```
-┌────────────────────────────────────────────────────────┐
-│  1. Configure Parameters                               │
-│  - Adjust People count (stepper +/-)                   │
-│  - Adjust Items Required For days (stepper +/-)        │
-│  - Select storage preference (Ambient vs. Refrigerator)│
-└──────────────────────────┬─────────────────────────────┘
-                           │
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│  2. Choose Produce Items                               │
-│  - Tap category tabs to filter produce categories      │
-│  - Use search input to filter specific items           │
-│  - Select item cards (turns green with checkmark)      │
-└──────────────────────────┬─────────────────────────────┘
-                           │
-                           ▼
-┌────────────────────────────────────────────────────────┐
-│  3. Review Recommended Shopping List                   │
-│  - Review rounded portion quantities on slide-up sheet │
-│  - Note yellow warning banners for shelf life limits   │
-│  - Click "Copy List" or "WhatsApp" to share list      │
-└────────────────────────────────────────────────────────┘
+### 1. Clone Repository
+```bash
+git clone https://github.com/uTharun23/QtyWise.git
+cd QtyWise
 ```
 
-### Frequently Asked Questions (FAQ)
-*   **Q: Why do some recommendations show as units instead of kg/g?**  
-    *A: Discrete items like eggs are sold as whole counts. The engine converts their weight portion equivalents into counts and rounds up to the nearest whole integer.*
-*   **Q: Why does a yellow warning block show below some of my items?**  
-    *A: This indicates a storage safety alert. If you choose "Ambient storage" and your planned Items Required For days exceed the ambient shelf life of that item (e.g. Gongura leaves for 7 days), a warning is triggered recommending refrigerator storage or smaller purchase intervals.*
+### 2. Backend Setup
+```bash
+cd backend
+npm install
+npm run dev
+```
+*Backend server will start at `http://localhost:5001`.*
+
+### 3. Frontend Setup
+Open a new terminal and serve the static frontend:
+```bash
+cd frontend
+npx serve ./ -p 3000
+```
+*Access QtyWise in your browser at `http://localhost:3000`.*
 
 ---
 
-## 💻 Developer & Contribution Guidelines
+## 🖼️ Screenshots
 
-### Branching Workflows & Commit Conventions
-To contribute to QtyWise:
-1.  Branch from `staging` using branch naming tags (e.g. `feat/telugu-font-support`, `bug/egg-rounding-ceil`, `data/ap-meat-coefficients`).
-2.  Follow conventional commit structures for message logs:
-    *   `feat: add coastal and Rayalaseema region multipliers`
-    *   `fix: resolve brinjal minimum portion floor bounds`
-    *   `docs: update system architecture database structures`
-    *   `data: update shelf life days for Gongura leaves`
-3.  Submit a Pull Request targeting the `staging` branch for integration testing.
+| Calculator Configuration | Selected Items & Shopping List |
+| :---: | :---: |
+| *(Add preview screenshot to `screenshots/config.png`)* | *(Add preview screenshot to `screenshots/selection.png`)* |
 
-### Coding Standards
-*   **ES Modules**: Use modern JavaScript ES Modules syntax (`import` / `export`) instead of CommonJS (`require`).
-*   **Separation of Concerns**: Keep calculations and display format logic out of UI controller files. Enforce validators at API boundary interfaces.
-*   **Weight Metric Standards**: Always execute calculations internally using integer **grams (`g`)** to maintain accuracy. Only convert to kilograms (`kg`) at the presentation boundary when rendering output values.
+| Purchase Recommendations | Saved Lists & History Drawer |
+| :---: | :---: |
+| *(Add preview screenshot to `screenshots/results.png`)* | *(Add preview screenshot to `screenshots/saved-lists.png`)* |
 
 ---
 
-## 🔧 Maintenance Guidelines
+## 🚀 Future Scope
 
-To maintain accuracy and security:
-*   **Seasonal Dataset Refinements**: Audit portion consumption averages and seasonal multipliers monthly to align recommendations with regional crop calendars in Andhra Pradesh.
-*   **Dependency Auditing**: Run `npm audit` bi-weekly to identify and patch security vulnerabilities in third-party library containers.
-*   **Linter Checks**: Run the Python lint script (`validate_csv.py`) before committing dataset changes to `ap_master_dataset_v1.0.csv` to verify field data types, casings, and unique IDs.
+*   **📲 WhatsApp Sharing**: One-click sharing of calculated shopping lists via WhatsApp.
+*   **💰 Estimated Price Calculator**: Integration with live market Mandi rates for grocery budget estimates.
+*   **🍲 Recipe Portion Scaling**: Calculate grocery needs based on specific dish menus (e.g. Biryani for 50 people).
+*   **🗺️ Multi-State Expansion**: Expand master datasets to Telangana, Tamil Nadu, and Karnataka regional diets.
 
 ---
 
-## 📄 License Information
+## 🌐 Live Demo
 
-This project is licensed under the MIT License. See [LICENSE](#) for details.
+*   **GitHub Repository**: [https://github.com/uTharun23/QtyWise](https://github.com/uTharun23/QtyWise)
+*   **Backend Health API**: `http://localhost:5001/health`
+*   **Catalog API Endpoint**: `http://localhost:5001/api/items`
+
+---
+
+## 👤 Author
+
+*   **Tharun**
+*   **GitHub**: [@uTharun23](https://github.com/uTharun23)
+*   **Project**: [QtyWise Repository](https://github.com/uTharun23/QtyWise)
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
