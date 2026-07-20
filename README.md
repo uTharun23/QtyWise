@@ -1,5 +1,6 @@
 # QtyWise — Smart Purchase Quantity Advisory Utility
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-https%3A%2F%2Fqty--wise.vercel.app-brightgreen?style=for-the-badge&logo=vercel)](https://qty-wise.vercel.app/)
 [![Build Status](https://img.shields.io/badge/build-passing-green.svg)](#)
 [![Version](https://img.shields.io/badge/version-1.0.0--AP-blue.svg)](#)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](#)
@@ -117,11 +118,12 @@ npx serve ./ -p 3000
 
 ---
 
-## 🌐 Live Demo
+## 🌐 Live Demo & Endpoints
 
-*   **GitHub Repository**: [https://github.com/uTharun23/QtyWise](https://github.com/uTharun23/QtyWise)
-*   **Backend Health API**: `http://localhost:5001/health`
-*   **Catalog API Endpoint**: `http://localhost:5001/api/items`
+*   🚀 **Live Web Application**: [https://qty-wise.vercel.app/](https://qty-wise.vercel.app/)
+*   💚 **Live Health API**: [https://qty-wise.vercel.app/health](https://qty-wise.vercel.app/health)
+*   📦 **Live Catalog API**: [https://qty-wise.vercel.app/api/items](https://qty-wise.vercel.app/api/items)
+*   🐙 **GitHub Repository**: [https://github.com/uTharun23/QtyWise](https://github.com/uTharun23/QtyWise)
 
 ---
 
