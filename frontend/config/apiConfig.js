@@ -1,3 +1,4 @@
 const hostname = window.location.hostname;
-const backendHost = (!hostname || hostname === 'localhost') ? '127.0.0.1' : hostname;
-export const API_BASE_URL = `http://${backendHost}:5001`;
+const isLocal = (!hostname || hostname === 'localhost' || hostname === '127.0.0.1');
+
+export const API_BASE_URL = isLocal ? 'http://127.0.0.1:5001' : window.location.origin;

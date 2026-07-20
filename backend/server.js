@@ -50,3 +50,5 @@ app.listen(config.port, () => {
   console.log(`Catalog API:  http://localhost:${config.port}/api/items`);
   console.log(`======================================`);
 });
+
+export default app;
