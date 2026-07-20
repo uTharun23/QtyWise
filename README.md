@@ -6,6 +6,8 @@
 [![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](#)
 [![Region](https://img.shields.io/badge/region-Andhra%20Pradesh-orange.svg)](#)
 
+![QtyWise Banner Poster](screenshots/qtywise_ui_poster.png)
+
 QtyWise is a smart, mobile-first purchase quantity advisory utility designed for households and community kitchens in Andhra Pradesh. It calculates the exact raw quantity of vegetables, leafy greens, meat, fish, seafood, herbs, and eggs to purchase based on portion requirements, duration (days), and refrigerator storage preferences — minimizing food waste and optimizing grocery budgets.
 
 ---
